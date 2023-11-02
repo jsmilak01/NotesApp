@@ -17,7 +17,8 @@ The following **extensions** are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-![c323project6](https://github.com/jsmilak01/NotesApp/assets/111994388/62c1946a-8b3e-4191-b0a0-54c26ec18604)
+![project7gif](https://github.com/jsmilak01/NotesApp/assets/111994388/b6b89c09-cfee-4c9f-aa28-0a63039bddd4)
+
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
