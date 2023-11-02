@@ -9,7 +9,9 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -45,10 +47,12 @@ class HomeScreenFragment : Fragment() {
         //load data from room library into the recycler view
         //val dataset = data from library
         //val customAdapter = CustomAdapter(dataset)
-        //val recyclerView: RecyclerView = findViewById(R.id.recycler_view)
+        val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view)
         //recyclerView.adapter = customAdapter
-
-        val newNoteButton = view.findViewById<Button>(R.id.add_note_button)
+        val staggeredGridLayoutManager = StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL)
+        recyclerView.layoutManager = staggeredGridLayoutManager
+        val newNoteButton = view.findViewById<ImageButton>(R.id.add_note_button)
+        val userButton = view.findViewById<ImageButton>(R.id.login_button)
 
         newNoteButton.setOnClickListener {
             //change screen to a new(empty) note fragment
@@ -56,6 +60,11 @@ class HomeScreenFragment : Fragment() {
             this.parentFragmentManager.commit{
                 replace(R.id.fragment_container_view, newNoteFragment)
             }
+        }
+        //need code when clicking item in recycler view opening up note fragment with that data
+
+        userButton.setOnClickListener{
+            //open login page
         }
 
         return view
@@ -87,11 +96,11 @@ class CustomAdapter(private val dataSet: Array<String>) : RecyclerView.Adapter<C
 
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
-        val textView: TextView
-        val deleteButton: ImageButton
+        val titleTextView: TextView
+        val descriptionTextView: TextView
         init{
-            textView = view.findViewById(R.id.textView)
-            deleteButton = view.findViewById<ImageButton>(R.id.delete_note_button)
+            titleTextView = view.findViewById<TextView>(R.id.recycler_note_title)
+            descriptionTextView = view.findViewById<TextView>(R.id.recycler_note_description)
         }
     }
 
@@ -103,7 +112,8 @@ class CustomAdapter(private val dataSet: Array<String>) : RecyclerView.Adapter<C
     }
 
     override fun onBindViewHolder(viewHolder: CustomAdapter.ViewHolder, position: Int) {
-        viewHolder.textView.text = dataSet[position]
+        viewHolder.titleTextView.text = dataSet[position]
+        viewHolder.descriptionTextView.text = dataSet[position]
     }
 
     override fun getItemCount(): Int {

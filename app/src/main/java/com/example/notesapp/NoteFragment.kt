@@ -1,5 +1,7 @@
 package com.example.notesapp
 
+import android.app.AlertDialog
+import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.commit
 
 // TODO: Rename parameter arguments, choose names that match
@@ -77,5 +80,21 @@ class NoteFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+}
+
+class DeleteNoteDialogFragment: DialogFragment(){
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        return activity?.let {
+            val builder = AlertDialog.Builder(it)
+            builder.setMessage("Are you sure you want to delete this note?")
+                .setPositiveButton("Yes"){ dialog, id ->
+                    //delete note
+                }
+                .setNegativeButton("No"){ dialog, id ->
+                    //do not delete note
+                }
+            builder.create()
+        }?: throw IllegalStateException("Activity cannot be null")
     }
 }
